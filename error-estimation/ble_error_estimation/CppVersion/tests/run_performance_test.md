@@ -19,7 +19,7 @@ The test simulates the complete MQTT message processing pipeline:
 ## Sample Messages Included
 
 The test includes realistic BLE positioning messages with varying anchor counts:
-- **Small message**: 3 used + 1 unused anchors (real format from your system)
+- **Small message**: 3 used + 1 unused anchors (example format)
 - **Medium message**: 6 used + 2 unused anchors 
 - **Large message**: 10 used + 4 unused anchors
 - **Extra large message**: 15 used + 6 unused anchors
@@ -92,22 +92,22 @@ You can add your own test messages by editing the `sample_mqtt_messages` vector 
     "is_moving": null,
     "location": {
         "dead_zones": [],
-        "map_id": "6419785d59613200077df1d6",
+        "map_id": "<map_id_redacted>",
         "position": {
             "quality": "normal",
-            "unused_anchors": [{"cart_d": 4.67, "id": "ea9", "mac": "d39d76bbc21b", "rssi": -66.19}],
+            "unused_anchors": [{"cart_d": 4.67, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -66.19}],
             "used_anchors": [
-                {"cart_d": 1.0, "id": "404", "mac": "ce59ac2d9cc5", "rssi": -57.0}
+                {"cart_d": 1.0, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -57.0}
             ],
-            "x": 5.92, "y": 2.21, "z": 0.0
+            "x": <x_coord>, "y": <y_coord>, "z": <z_coord>
         },
         "strategy": "centroid",
         "zones": []
     },
     "tag": {
         "ble": 1,
-        "id": "31955", 
-        "mac": "c00fbe457cd3",
+        "id": "<tag_id>", 
+        "mac": "<tag_mac_redacted>",
         "uwb": 0
     },
     "timestamp": 1751374881169

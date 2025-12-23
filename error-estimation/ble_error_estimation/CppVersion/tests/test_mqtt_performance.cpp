@@ -32,21 +32,21 @@ struct MockMQTTUserData {
     PathLossModel model;
 };
 
-// Sample MQTT message payloads for testing (using real format from your system)
+// Sample MQTT message payloads for testing (using example format - actual data redacted)
 std::vector<std::string> sample_mqtt_messages = {
     // Sample message 1: Real format with 3 used + 1 unused anchors
     R"({
         "is_moving": null,
         "location": {
             "dead_zones": [],
-            "map_id": "6419785d59613200077df1d6",
+            "map_id": "<map_id_redacted>",
             "position": {
                 "quality": "normal",
-                "unused_anchors": [{"cart_d": 4.67, "id": "ea9", "mac": "d39d76bbc21b", "rssi": -66.19}],
+                "unused_anchors": [{"cart_d": 4.67, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -66.19}],
                 "used_anchors": [
-                    {"cart_d": 1.0, "id": "404", "mac": "ce59ac2d9cc5", "rssi": -57.0},
-                    {"cart_d": 2.07, "id": "blank", "mac": "e7a7f022204d", "rssi": -59.47},
-                    {"cart_d": 4.97, "id": "2b1", "mac": "e94e09efad55", "rssi": -64.92}
+                    {"cart_d": 1.0, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -57.0},
+                    {"cart_d": 2.07, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -59.47},
+                    {"cart_d": 4.97, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -64.92}
                 ],
                 "x": 5.92,
                 "y": 2.21,
@@ -58,7 +58,7 @@ std::vector<std::string> sample_mqtt_messages = {
         "tag": {
             "ble": 1,
             "id": "31955",
-            "mac": "c00fbe457cd3",
+            "mac": "<tag_mac_redacted>",
             "uwb": 0
         },
         "timestamp": 1751374881169
@@ -69,17 +69,17 @@ std::vector<std::string> sample_mqtt_messages = {
         "is_moving": null,
         "location": {
             "dead_zones": [],
-            "map_id": "6419785d59613200077df1d6",
+            "map_id": "<map_id_redacted>",
             "position": {
                 "quality": "good",
                 "unused_anchors": [
-                    {"cart_d": 5.12, "id": "ea9", "mac": "d39d76bbc21b", "rssi": -68.23},
+                    {"cart_d": 5.12, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -68.23},
                     {"cart_d": 6.45, "id": "f2c", "mac": "a1b2c3d4e5f6", "rssi": -71.88}
                 ],
                 "used_anchors": [
-                    {"cart_d": 1.2, "id": "404", "mac": "ce59ac2d9cc5", "rssi": -58.5},
-                    {"cart_d": 2.1, "id": "blank", "mac": "e7a7f022204d", "rssi": -60.12},
-                    {"cart_d": 3.8, "id": "2b1", "mac": "e94e09efad55", "rssi": -63.77},
+                    {"cart_d": 1.2, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -58.5},
+                    {"cart_d": 2.1, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -60.12},
+                    {"cart_d": 3.8, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -63.77},
                     {"cart_d": 4.2, "id": "7a8", "mac": "b8c9d0e1f2a3", "rssi": -65.34},
                     {"cart_d": 2.9, "id": "9e4", "mac": "f4e5d6c7b8a9", "rssi": -61.89},
                     {"cart_d": 5.1, "id": "3f7", "mac": "1a2b3c4d5e6f", "rssi": -67.15}
@@ -105,19 +105,19 @@ std::vector<std::string> sample_mqtt_messages = {
         "is_moving": null,
         "location": {
             "dead_zones": [],
-            "map_id": "6419785d59613200077df1d6",
+            "map_id": "<map_id_redacted>",
             "position": {
                 "quality": "excellent",
                 "unused_anchors": [
-                    {"cart_d": 6.78, "id": "ea9", "mac": "d39d76bbc21b", "rssi": -72.45},
+                    {"cart_d": 6.78, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -72.45},
                     {"cart_d": 7.23, "id": "f2c", "mac": "a1b2c3d4e5f6", "rssi": -74.12},
                     {"cart_d": 8.91, "id": "b5d", "mac": "9f8e7d6c5b4a", "rssi": -76.89},
                     {"cart_d": 9.12, "id": "c8a", "mac": "2c3d4e5f6a7b", "rssi": -78.23}
                 ],
                 "used_anchors": [
-                    {"cart_d": 0.8, "id": "404", "mac": "ce59ac2d9cc5", "rssi": -55.2},
-                    {"cart_d": 1.5, "id": "blank", "mac": "e7a7f022204d", "rssi": -57.83},
-                    {"cart_d": 2.3, "id": "2b1", "mac": "e94e09efad55", "rssi": -59.67},
+                    {"cart_d": 0.8, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -55.2},
+                    {"cart_d": 1.5, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -57.83},
+                    {"cart_d": 2.3, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -59.67},
                     {"cart_d": 2.8, "id": "7a8", "mac": "b8c9d0e1f2a3", "rssi": -61.44},
                     {"cart_d": 3.2, "id": "9e4", "mac": "f4e5d6c7b8a9", "rssi": -62.78},
                     {"cart_d": 3.9, "id": "3f7", "mac": "1a2b3c4d5e6f", "rssi": -64.12},
@@ -147,11 +147,11 @@ std::vector<std::string> sample_mqtt_messages = {
         "is_moving": null,
         "location": {
             "dead_zones": [],
-            "map_id": "6419785d59613200077df1d6",
+            "map_id": "<map_id_redacted>",
             "position": {
                 "quality": "excellent",
                 "unused_anchors": [
-                    {"cart_d": 7.89, "id": "ea9", "mac": "d39d76bbc21b", "rssi": -75.12},
+                    {"cart_d": 7.89, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -75.12},
                     {"cart_d": 8.45, "id": "f2c", "mac": "a1b2c3d4e5f6", "rssi": -76.78},
                     {"cart_d": 9.23, "id": "b5d", "mac": "9f8e7d6c5b4a", "rssi": -78.45},
                     {"cart_d": 10.1, "id": "c8a", "mac": "2c3d4e5f6a7b", "rssi": -80.12},
@@ -159,9 +159,9 @@ std::vector<std::string> sample_mqtt_messages = {
                     {"cart_d": 12.5, "id": "f9b", "mac": "3a4b5c6d7e8f", "rssi": -84.67}
                 ],
                 "used_anchors": [
-                    {"cart_d": 0.7, "id": "404", "mac": "ce59ac2d9cc5", "rssi": -54.1},
-                    {"cart_d": 1.2, "id": "blank", "mac": "e7a7f022204d", "rssi": -56.23},
-                    {"cart_d": 1.8, "id": "2b1", "mac": "e94e09efad55", "rssi": -58.45},
+                    {"cart_d": 0.7, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -54.1},
+                    {"cart_d": 1.2, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -56.23},
+                    {"cart_d": 1.8, "id": "<anchor_id>", "mac": "<anchor_mac_redacted>", "rssi": -58.45},
                     {"cart_d": 2.3, "id": "7a8", "mac": "b8c9d0e1f2a3", "rssi": -59.78},
                     {"cart_d": 2.9, "id": "9e4", "mac": "f4e5d6c7b8a9", "rssi": -61.12},
                     {"cart_d": 3.4, "id": "3f7", "mac": "1a2b3c4d5e6f", "rssi": -62.89},
@@ -192,13 +192,13 @@ std::vector<std::string> sample_mqtt_messages = {
     })"
 };
 
-// Mock anchor data for creating anchors (using real MAC addresses from your messages)
+// Mock anchor data for creating anchors (using example MAC addresses - actual data redacted)
 std::unordered_map<std::string, PointR3> mock_anchor_positions = {
-    // Real MACs from your system
-    {"ce59ac2d9cc5", std::make_tuple(0.0f, 0.0f, 2.5f)},
-    {"e7a7f022204d", std::make_tuple(10.0f, 0.0f, 2.5f)},
-    {"e94e09efad55", std::make_tuple(10.0f, 8.0f, 2.5f)},
-    {"d39d76bbc21b", std::make_tuple(0.0f, 8.0f, 2.5f)},
+    // Example anchor positions (MAC addresses redacted)
+    {"<anchor_mac_1>", std::make_tuple(0.0f, 0.0f, 2.5f)},
+    {"<anchor_mac_2>", std::make_tuple(10.0f, 0.0f, 2.5f)},
+    {"<anchor_mac_3>", std::make_tuple(10.0f, 8.0f, 2.5f)},
+    {"<anchor_mac_4>", std::make_tuple(0.0f, 8.0f, 2.5f)},
     {"a1b2c3d4e5f6", std::make_tuple(5.0f, 4.0f, 2.5f)},
     {"b8c9d0e1f2a3", std::make_tuple(2.5f, 2.0f, 2.5f)},
     {"f4e5d6c7b8a9", std::make_tuple(7.5f, 6.0f, 2.5f)},

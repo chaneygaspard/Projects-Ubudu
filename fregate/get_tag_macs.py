@@ -13,8 +13,8 @@ mezzanine map id: 682c66f08cde618ce127025e
 downstairs map id: 682c66de8cde618ce1270230
 """
 
-BROKER_HOST = "ils-paris.ubudu.com"   # or "localhost"
-BROKER_PORT = 1883
+BROKER_HOST = ""  # MQTT broker address (redacted)
+BROKER_PORT = 0  # MQTT broker port (redacted)
 TOPIC        = "engine/+/positions"           # the same pattern you used in mosquitto_sub
 MAX_MESSAGES_ACCEPTED: int = 1
 

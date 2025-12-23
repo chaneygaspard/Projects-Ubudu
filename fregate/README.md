@@ -30,9 +30,9 @@ The main testing script that evaluates the accuracy of the RTLS positioning syst
 - **Comprehensive Reporting**: Provides detailed final statistics including runtime, per-floor accuracy, message distribution, and non-responsive tags
 
 **Configuration:**
-- **MQTT Connection**: Connects to ils-paris.ubudu.com:1883 using the topic pattern "engine/+/positions"
+- **MQTT Connection**: Connects to MQTT broker (redacted) using the topic pattern "engine/+/positions"
 - **Tag Limits**: Processes up to 3 messages per tag to prevent skewing results
-- **API Endpoint**: Uses the BLE communications REST API for tag activation
+- **API Endpoint**: Uses the BLE communications REST API for tag activation (redacted)
 - **Error Handling**: Robust error handling for network issues, JSON parsing, and unexpected data
 
 **Output Statistics:**

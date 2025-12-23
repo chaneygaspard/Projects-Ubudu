@@ -38,11 +38,11 @@ start_tunnel() {
 }
 
 # Configuration
-SSH_KEY="/home/ubudu/.ssh/id_ed25519"
-SERVER1="149.202.166.37"
-SERVER2="176.175.217.100"
-USER1="ubuntu"
-USER2="ubudu"
+SSH_KEY=""  # SSH key path (redacted)
+SERVER1=""  # Server 1 address (redacted)
+SERVER2=""  # Server 2 address (redacted)
+USER1=""  # Server 1 username (redacted)
+USER2=""  # Server 2 username (redacted)
 
 # Start tunnels
 echo "📡 Setting up tunnels to $SERVER1..."

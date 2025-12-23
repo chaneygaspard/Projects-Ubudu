@@ -4,13 +4,13 @@ import time, requests, json, csv, os, math
 from statistics import mean, stdev, median
 
 # Configuration
-BROKER_HOST = "ils-paris.ubudu.com"
-BROKER_PORT = 1883
+BROKER_HOST = ""  # MQTT broker address (redacted)
+BROKER_PORT = 0  # MQTT broker port (redacted)
 TOPIC = "engine/+/positions"
 OUTPUT_DIR = "ml_training_data_new"
 
 # API configuration
-url = "https://rtls-fas.groupe-fregate.com/ble-comms-rest-api/adv_queued"
+url = ""  # API endpoint (redacted)
 headers = {
     "accept": "application/json",
     "Content-Type": "application/json"

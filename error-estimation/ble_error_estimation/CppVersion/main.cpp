@@ -109,7 +109,7 @@ std::string http_get_request(const std::string& url, const std::string& username
 }
 
 /**
- * @brief Create an Anchor object by fetching anchor configuration from the Ubudu API
+ * @brief Create an Anchor object by fetching anchor configuration from the API
  * 
  * @param anch_mac MAC address of the anchor to initialize
  * @return std::unique_ptr<Anchor> Configured Anchor object with position and MAC address from API
@@ -156,7 +156,7 @@ std::unique_ptr<Anchor> create_anchor_class(const std::string& anch_mac) {
 }
 
 /**
- * @brief Create multiple Anchor objects by fetching anchor configurations from the Ubudu API
+ * @brief Create multiple Anchor objects by fetching anchor configurations from the API
  * 
  * @param anch_macs List of MAC addresses of anchors to initialize
  * @return std::unordered_map<std::string, std::unique_ptr<Anchor>> Map of MAC addresses to Anchor objects

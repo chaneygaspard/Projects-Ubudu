@@ -228,12 +228,11 @@ python3 -m pytest tests/
 
 ## 📄 License
 
-This project is proprietary software developed for Ubudu indoor positioning systems.
+[License information redacted]
 
 ## 👥 Team
 
-- **Developer**: Gaspard Chaney (gaspard.chaney@ubudu.com)
-- **Company**: Ubudu
+- **Developer**: [Name redacted]
 - **Project**: Indoor Location Services (ILS)
 
 ## 🔗 Related Projects

@@ -37,13 +37,13 @@ echo "✅ Git user configured"
 echo "🌐 Setting up GitLab remote..."
 echo ""
 echo "Please create a new project on GitLab named 'error_estimation'"
-echo "GitLab URL: https://gitlab.ubudu.com/gaspard.chaney/error_estimation"
+echo "GitLab URL: [redacted]"
 echo ""
 read -p "Have you created the GitLab project? (y/n): " CREATED_PROJECT
 
 if [[ "$CREATED_PROJECT" == "y" || "$CREATED_PROJECT" == "Y" ]]; then
     # Add remote
-    GITLAB_URL="git@gitlab.ubudu.com:gaspard.chaney/error_estimation.git"
+    read -p "Enter GitLab repository URL: " GITLAB_URL
     
     if git remote | grep -q "origin"; then
         echo "📍 Updating existing origin remote..."
@@ -56,7 +56,7 @@ if [[ "$CREATED_PROJECT" == "y" || "$CREATED_PROJECT" == "Y" ]]; then
     echo "✅ GitLab remote configured: $GITLAB_URL"
 else
     echo "⚠️  Skipping remote setup. You can add it later with:"
-    echo "   git remote add origin git@gitlab.ubudu.com:gaspard.chaney/error_estimation.git"
+    echo "   git remote add origin <your_gitlab_url>"
 fi
 
 # Add all files to Git
@@ -116,7 +116,7 @@ echo "   ├── ble_error_estimation/  (BLE positioning)"
 echo "   ├── README.md              (Main documentation)"
 echo "   └── .gitignore             (Git ignore rules)"
 echo ""
-echo "🔗 GitLab URL: https://gitlab.ubudu.com/gaspard.chaney/error_estimation"
+echo "🔗 GitLab URL: [configure your repository URL]"
 echo ""
 echo "📋 Next steps:"
 echo "   1. Make changes to your code"

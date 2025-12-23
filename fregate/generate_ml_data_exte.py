@@ -17,14 +17,14 @@ import sys
 MAX_LINES: int = 8500
 
 # Configuration - Updated for SSH tunnels
-BROKER_HOST = "127.0.0.1"  # Using SSH tunnel
-BROKER_PORTS = [1884]  # Use working tunneled port
+BROKER_HOST = ""  # MQTT broker address (redacted)
+BROKER_PORTS = [0]  # MQTT broker ports (redacted)
 TOPIC = "engine/+/positions"
 OUTPUT_DIR = "ml_training_data_exte_new"
 
 # API configuration - Use working tunneled endpoint
 API_URLS = [
-    "https://127.0.0.1:8443/ble-comms-rest-api/adv_queued"  # Server 1 tunnel
+    ""  # API endpoint (redacted)
 ]
 headers = {
     "accept": "application/json",
@@ -149,7 +149,7 @@ def check_tunnel_connections():
     print("🔍 Checking SSH tunnel connections...")
     
     # Check API tunnels
-    api_ports = [8443]
+    api_ports = [0]  # API tunnel ports (redacted)
     active_api_ports = []
     for port in api_ports:
         try:
@@ -166,7 +166,7 @@ def check_tunnel_connections():
             print(f"❌ Error checking API tunnel port {port}: {e}")
     
     # Check MQTT tunnels
-    mqtt_ports = [1884]
+    mqtt_ports = [0]  # MQTT tunnel ports (redacted)
     active_mqtt_ports = []
     for port in mqtt_ports:
         try:
@@ -648,7 +648,7 @@ def on_connect(client, userdata, flags, rc, properties=None):
         print("✅ MQTT connected via SSH tunnel")
     else:
         print("❌ MQTT Connect failed")
-        print("💡 Make sure SSH tunnel is active: ssh -i ~/.ssh/id_ed25519 -N -L 127.0.0.1:1884:127.0.0.1:1884 -p 22 ubuntu@149.202.166.37")
+        print("💡 Make sure SSH tunnel is active (redacted)")
 
 def on_subscribe(client, userdata, mid, granted_qos, properties=None):
     print("✅ Subscribed, waiting for messages…")

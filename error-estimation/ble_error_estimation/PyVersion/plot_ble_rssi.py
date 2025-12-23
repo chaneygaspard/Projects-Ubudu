@@ -9,18 +9,18 @@ import paho.mqtt.client as mqtt
 import requests
 
 # MQTT Configuration
-BROKER = "ils-paris.ubudu.com"
-PORT = 1883
-POSITION_TOPIC = "engine/6ba4a2a3-0/positions"
-ERROR_TOPIC = "engine/6ba4a2a3-0/error_estimates"
-CLIENT_ID = "ble_rssi_plotter"
+BROKER = ""  # MQTT broker address (redacted)
+PORT = 0  # MQTT broker port (redacted)
+POSITION_TOPIC = ""  # MQTT topic for position data (redacted)
+ERROR_TOPIC = ""  # MQTT topic for error estimates (redacted)
+CLIENT_ID = ""  # MQTT client identifier (redacted)
 
 # Collection settings
-COLLECTION_TIME = 30  # 10 minutes in seconds
+COLLECTION_TIME = 30  # Data collection period in seconds
 
 # API Configuration
-ANCHOR_INIT_BASE = "https://ils-paris.ubudu.com/confv1/api/dongles?macAddress={}"
-anch_api_auth = ("admin", "ubudu_rocks")
+ANCHOR_INIT_BASE = ""  # API endpoint for anchor configuration (redacted)
+anch_api_auth = ("", "")  # API authentication credentials (redacted)
 
 # Data storage
 position_data = defaultdict(list)  # {tag_mac: [(timestamp, x, y, z), ...]}

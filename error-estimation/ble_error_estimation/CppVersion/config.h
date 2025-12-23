@@ -10,24 +10,24 @@
  * without changing the main application code.
  */
 
-// Input (SHE) environment
+// Input environment
 namespace ConfigInput {
-    const std::string BROKER = "rtls-fas.groupe-fregate.com";  // Use localhost with SSH port forwarding
-    const int PORT = 1884;
-    const std::string TOPIC = "engine/+/positions";
-    const std::string CLIENT_ID = "ble_rssi_probability_model_cpp_input";
-    // API for input (SHE)
-    const std::string ANCHOR_INIT_BASE = "https://ils-she.ubudu.com/confv1/api/dongles?macAddress={}";
-    const std::string API_USERNAME = "admin";
-    const std::string API_PASSWORD = "ubudu_rocks";
+    const std::string BROKER = "";  // MQTT broker address (redacted)
+    const int PORT = 0;  // MQTT broker port (redacted)
+    const std::string TOPIC = "";  // MQTT topic pattern (redacted)
+    const std::string CLIENT_ID = "";  // MQTT client identifier (redacted)
+    // API for input
+    const std::string ANCHOR_INIT_BASE = "";  // API endpoint (redacted)
+    const std::string API_USERNAME = "";  // API username (redacted)
+    const std::string API_PASSWORD = "";  // API password (redacted)
 }
 
-// Output (Paris) environment
+// Output environment
 namespace ConfigOutput {
-    const std::string BROKER = "ils-paris.ubudu.com";
-    const int PORT = 1883;
-    const std::string TOPIC = "engine/6ba4a2a3-0/error_estimates";
-    const std::string CLIENT_ID = "ble_rssi_probability_model_cpp_output";
+    const std::string BROKER = "";  // MQTT broker address (redacted)
+    const int PORT = 0;  // MQTT broker port (redacted)
+    const std::string TOPIC = "";  // MQTT topic for output (redacted)
+    const std::string CLIENT_ID = "";  // MQTT client identifier (redacted)
 }
 
 // Legacy config for compatibility (can be removed after refactor)
@@ -35,7 +35,7 @@ namespace Config {
     const std::string BROKER = ConfigOutput::BROKER;
     const int PORT = ConfigOutput::PORT;
     const std::string CLIENT_ID = ConfigOutput::CLIENT_ID;
-    const std::string TAG_POSITION_STREAM = "engine/6ba4a2a3-0/positions";
+    const std::string TAG_POSITION_STREAM = "";  // MQTT topic for tag positions (redacted)
     const std::string TOPIC_OUT = ConfigOutput::TOPIC;
     const std::string ANCHOR_INIT_BASE = ConfigInput::ANCHOR_INIT_BASE;
     const std::string API_USERNAME = ConfigInput::API_USERNAME;

@@ -6,7 +6,7 @@ This is the C++ implementation of the BLE RSSI positioning system with real-time
 
 - **Real-time MQTT processing** of tag position data
 - **Dynamic anchor discovery** from incoming messages
-- **Automatic anchor initialization** via Ubudu API
+- **Automatic anchor initialization** via API
 - **Pointer-based efficient processing** with minimal memory overhead
 - **Health monitoring** and adaptive calibration of anchors
 - **Error estimation** using statistical confidence intervals
@@ -68,7 +68,7 @@ make run
 ```
 
 The application will:
-1. Connect to the MQTT broker (`ils-paris.ubudu.com:1883`)
+1. Connect to the configured MQTT broker
 2. Subscribe to tag position messages
 3. Auto-discover anchors from the first message
 4. Initialize anchors by fetching their positions from the API
@@ -76,15 +76,25 @@ The application will:
 
 ### Configuration
 
-Key configuration constants in `main.cpp`:
+Key configuration constants in `config.h`:
 
 ```cpp
-const std::string BROKER = "ils-paris.ubudu.com";
-const int PORT = 1883;
-const std::string TAG_POSITION_STREAM = "engine/6ba4a2a3-0/positions";
-const std::string TOPIC_OUT = "engine/6ba4a2a3-0/error_estimates";
-const std::string API_USERNAME = "admin";
-const std::string API_PASSWORD = "ubudu_rocks";
+// Input environment
+namespace ConfigInput {
+    const std::string BROKER = "";  // MQTT broker address
+    const int PORT = 0;  // MQTT broker port
+    const std::string TOPIC = "";  // MQTT topic pattern
+    const std::string ANCHOR_INIT_BASE = "";  // API endpoint
+    const std::string API_USERNAME = "";  // API username
+    const std::string API_PASSWORD = "";  // API password
+}
+
+// Output environment
+namespace ConfigOutput {
+    const std::string BROKER = "";  // MQTT broker address
+    const int PORT = 0;  // MQTT broker port
+    const std::string TOPIC = "";  // MQTT topic for output
+}
 ```
 
 ## Architecture
@@ -131,7 +141,7 @@ main.cpp
    - Publishes error estimates and anchor health data
 
 2. **HTTP Client** (`libcurl`)
-   - Fetches anchor configurations from Ubudu API
+   - Fetches anchor configurations from API
    - Handles authentication and error responses
 
 3. **JSON Processing** (`nlohmann::json`)
@@ -165,17 +175,17 @@ The application publishes JSON messages to the error estimates topic:
 
 ```json
 {
-  "tag_mac": "c00fbe457cd3",
-  "error_estimate": 1.23,
+  "tag_mac": "<tag_mac_address>",
+  "error_estimate": <error_radius>,
   "anchors": [
     {
-      "mac": "ce59ac2d9cc5",
-      "n_var": 2.1,
-      "ewma": 1.5
+      "mac": "<anchor_mac>",
+      "n_var": <path_loss_exponent>,
+      "ewma": <health_metric>
     }
   ],
   "warning_anchors": [],
-  "faulty_anchors": ["d39d76bbc21b"]
+  "faulty_anchors": ["<anchor_mac>"]
 }
 ```
 

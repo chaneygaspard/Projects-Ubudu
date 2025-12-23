@@ -19,7 +19,7 @@ downstairs map id: 682c66de8cde618ce1270230
 """
 
 
-url = "https://rtls-fas.groupe-fregate.com/ble-comms-rest-api/adv_queued"
+url = ""  # API endpoint (redacted)
 headers = {
     "accept": "application/json",
     "Content-Type": "application/json"
@@ -261,8 +261,8 @@ TAG_MAC_TO_FLOOR: Dict[str, int] = {
     'e0179d3286a1': 1   # 34465
 }
 
-BROKER_HOST = "rtls-fas.groupe-fregate.com"   # or "localhost"
-BROKER_PORT = 1884
+BROKER_HOST = ""  # MQTT broker address (redacted)
+BROKER_PORT = 0  # MQTT broker port (redacted)
 TOPIC        = "engine/+/positions"           # the same pattern you used in mosquitto_sub
 MAX_MESSAGES_ACCEPTED: int = 1
 

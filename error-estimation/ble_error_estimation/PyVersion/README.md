@@ -1,15 +1,15 @@
 # BLE RSSI Positioning System
 
-A real-time Bluetooth Low Energy (BLE) positioning system that processes RSSI (Received Signal Strength Indicator) measurements from Ubudu positioning infrastructure to estimate position error bounds with adaptive anchor health monitoring and Kalman filter-based parameter estimation.
+A real-time Bluetooth Low Energy (BLE) positioning system that processes RSSI (Received Signal Strength Indicator) measurements from positioning infrastructure to estimate position error bounds with adaptive anchor health monitoring and Kalman filter-based parameter estimation.
 
 ## Features
 
-- **Real-time MQTT processing**: Live processing of Ubudu positioning data streams
+- **Real-time MQTT processing**: Live processing of positioning data streams
 - **Dynamic anchor discovery**: Automatic detection and initialization of anchors from MQTT messages
 - **Adaptive path-loss modeling**: Kalman filter-based parameter estimation for RSSI₀ and path-loss exponent (n)
 - **Anchor health monitoring**: EWMA-based detection of faulty anchors with automatic filtering
 - **Error radius calculation**: 95% confidence error bounds (CEP95) based on statistical analysis
-- **API integration**: Automatic fetching of anchor positions from Ubudu configuration API
+- **API integration**: Automatic fetching of anchor positions from configuration API
 - **Comprehensive visualization**: Static plot generation for system analysis and debugging
 - **Real-time data collection**: Configurable data collection periods for analysis
 
@@ -17,7 +17,7 @@ A real-time Bluetooth Low Energy (BLE) positioning system that processes RSSI (R
 
 ### Core Components
 
-- **`mqtt_runner.py`**: Main MQTT client for real-time processing of Ubudu positioning data
+- **`mqtt_runner.py`**: Main MQTT client for real-time processing of positioning data
 - **`models.py`**: Data models for Anchors, Tags, and Path-loss models with Kalman integration
 - **`metrics.py`**: TagSystem class and anchor health management with EWMA filtering
 - **`kalman.py`**: Kalman filter implementation for adaptive RSSI₀ and n parameter estimation
@@ -37,8 +37,8 @@ A real-time Bluetooth Low Energy (BLE) positioning system that processes RSSI (R
 ### Prerequisites
 
 - Python 3.8+
-- Access to Ubudu MQTT broker (`ils-paris.ubudu.com`)
-- Ubudu API credentials
+- Access to MQTT broker
+- API credentials
 
 ### Dependencies
 
@@ -62,11 +62,11 @@ python mqtt_runner.py
 ```
 
 The system will:
-1. Connect to Ubudu MQTT broker at `ils-paris.ubudu.com`
-2. Subscribe to `engine/6ba4a2a3-0/positions` for positioning data
+1. Connect to MQTT broker
+2. Subscribe to configured topic for positioning data
 3. Dynamically discover and initialize anchors from first message
 4. Process tag positioning data with adaptive parameter estimation
-5. Publish error estimates to `engine/6ba4a2a3-0/error_estimates`
+5. Publish error estimates to configured output topic
 
 ### Data Collection and Visualization
 
@@ -88,18 +88,18 @@ Collects data for a specified period (default 30 seconds) and generates comprehe
 
 Edit `mqtt_runner.py`:
 ```python
-BROKER = "ils-paris.ubudu.com"
-PORT = 1883
-TAG_POSITION_STREAM = "engine/6ba4a2a3-0/positions"
-TOPIC_OUT = "engine/6ba4a2a3-0/error_estimates"
-CLIENT_ID = "ble_rssi_probability_model"
+BROKER = ""  # MQTT broker address
+PORT = 0  # MQTT broker port
+TAG_POSITION_STREAM = ""  # MQTT topic for position data
+TOPIC_OUT = ""  # MQTT topic for error estimates
+CLIENT_ID = ""  # MQTT client identifier
 ```
 
 ### API Configuration
 
 ```python
-ANCHOR_INIT_BASE = "https://ils-paris.ubudu.com/confv1/api/dongles?macAddress={}"
-anch_api_auth = ("admin", "ubudu_rocks")
+ANCHOR_INIT_BASE = ""  # API endpoint for anchor configuration
+anch_api_auth = ("", "")  # API authentication credentials
 ```
 
 ### System Parameters
@@ -115,36 +115,35 @@ Key parameters in `metrics.py`:
 Edit `plot_ble_rssi.py`:
 ```python
 COLLECTION_TIME = 30  # Data collection period in seconds
-BROKER = "ils-paris.ubudu.com"
-POSITION_TOPIC = "engine/6ba4a2a3-0/positions"
-ERROR_TOPIC = "engine/6ba4a2a3-0/error_estimates"
+BROKER = ""  # MQTT broker address
+POSITION_TOPIC = ""  # MQTT topic for position data
+ERROR_TOPIC = ""  # MQTT topic for error estimates
 ```
 
 ## Message Formats
 
 ### Input Message Format
 
-Real Ubudu positioning data from `engine/6ba4a2a3-0/positions`:
+Positioning data message structure (example format - actual data redacted):
 
 ```json
 {
-    "timestamp": 1751374881169,
+    "timestamp": <timestamp>,
     "tag": {
-        "mac": "c00fbe457cd3",
-        "id": "31955"
+        "mac": "<tag_mac_address>",
+        "id": "<tag_id>"
     },
     "location": {
         "position": {
-            "x": 5.92,
-            "y": 2.21,
-            "z": 0.0,
-            "quality": "normal",
+            "x": <x_coordinate>,
+            "y": <y_coordinate>,
+            "z": <z_coordinate>,
+            "quality": "<quality_string>",
             "used_anchors": [
-                {"mac": "ce59ac2d9cc5", "id": "404", "rssi": -57.0, "cart_d": 1.0},
-                {"mac": "e7a7f022204d", "id": "blank", "rssi": -59.47, "cart_d": 2.07}
+                {"mac": "<anchor_mac>", "id": "<anchor_id>", "rssi": <rssi_value>, "cart_d": <distance>}
             ],
             "unused_anchors": [
-                {"mac": "d39d76bbc21b", "id": "ea9", "rssi": -66.19, "cart_d": 4.67}
+                {"mac": "<anchor_mac>", "id": "<anchor_id>", "rssi": <rssi_value>, "cart_d": <distance>}
             ]
         }
     }
@@ -153,21 +152,21 @@ Real Ubudu positioning data from `engine/6ba4a2a3-0/positions`:
 
 ### Output Message Format
 
-Error estimates published to `engine/6ba4a2a3-0/error_estimates`:
+Error estimates published to configured output topic:
 
 ```json
 {
-    "tag_mac": "c00fbe457cd3",
-    "error_estimate": 1.25,
+    "tag_mac": "<tag_mac_address>",
+    "error_estimate": <error_radius>,
     "anchors": [
         {
-            "mac": "ce59ac2d9cc5",
-            "n_var": 2.1,
-            "ewma": 3.2
+            "mac": "<anchor_mac>",
+            "n_var": <path_loss_exponent>,
+            "ewma": <health_metric>
         }
     ],
     "warning_anchors": [],
-    "faulty_anchors": ["d39d76bbc21b"]
+    "faulty_anchors": ["<anchor_mac>"]
 }
 ```
 
@@ -176,7 +175,7 @@ Error estimates published to `engine/6ba4a2a3-0/error_estimates`:
 The system automatically discovers anchors from the first MQTT message:
 
 1. **First Message Processing**: Extracts MAC addresses from `used_anchors` and `unused_anchors`
-2. **API Fetching**: Queries Ubudu API for each discovered anchor's position
+2. **API Fetching**: Queries API for each discovered anchor's position
 3. **Initialization**: Creates `Anchor` objects with coordinates and default parameters
 4. **Adaptive Learning**: Each anchor's RSSI₀ and n parameters evolve via Kalman filtering
 
@@ -252,25 +251,25 @@ python -m pytest tests/ -v
 
 Monitor anchor ages (message counts) for processing verification:
 ```
-DEBUG - Used anchors in message: ['ce59ac2d9cc5', 'e7a7f022204d']
-DEBUG - Unused anchors in message: ['d39d76bbc21b']
-Initialized 4 anchors
+DEBUG - Used anchors in message: [<anchor_mac>, ...]
+DEBUG - Unused anchors in message: [<anchor_mac>, ...]
+Initialized <n> anchors
 ```
 
 ## API Integration
 
 ### Anchor Position Fetching
 
-Automatic position retrieval from Ubudu configuration API:
+Automatic position retrieval from configuration API:
 ```python
-# API endpoint
-https://ils-paris.ubudu.com/confv1/api/dongles?macAddress={mac}
+# API endpoint (configured in ANCHOR_INIT_BASE)
+# Format: <api_endpoint>?macAddress={mac}
 
-# Authentication
-("admin", "ubudu_rocks")
+# Authentication (configured in anch_api_auth)
+# Format: (username, password)
 
 # Response format
-[{"x": 0.0, "y": 0.0, "z": 2.5, ...}]
+[{"x": <x_coord>, "y": <y_coord>, "z": <z_coord>, ...}]
 ```
 
 ## Package Structure

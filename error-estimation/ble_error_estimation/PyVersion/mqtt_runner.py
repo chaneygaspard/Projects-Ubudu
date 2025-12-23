@@ -9,63 +9,28 @@ from metrics import TagSystem, update_anchors_from_tag_data
 from utils import PointR3
 
 
-ANCHOR_STREAM_BASE: str = "gw/+/dev/{}/serial/read" #get with mqtt |input macafress
-anch_api_auth: Tuple[str, str] = ("admin", "ubudu_rocks")
-ANCHOR_INIT_BASE: str = "https://ils-paris.ubudu.com/confv1/api/dongles?macAddress={}" #get with curl |input macadress
-TAG_POSITION_STREAM: str = "engine/6ba4a2a3-0/positions"
+ANCHOR_STREAM_BASE: str = ""  # MQTT topic pattern for anchor data (redacted)
+anch_api_auth: Tuple[str, str] = ("", "")  # API authentication credentials (redacted)
+ANCHOR_INIT_BASE: str = ""  # API endpoint for anchor configuration (redacted)
+TAG_POSITION_STREAM: str = ""  # MQTT topic for tag position data (redacted)
 
-BROKER: str = "ils-paris.ubudu.com"
-PORT: int = 1883
-TOPIC_OUT = "engine/6ba4a2a3-0/error_estimates"
-CLIENT_ID: str = "ble_rssi_probability_model"
+BROKER: str = ""  # MQTT broker address (redacted)
+PORT: int = 0  # MQTT broker port (redacted)
+TOPIC_OUT = ""  # MQTT topic for error estimates output (redacted)
+CLIENT_ID: str = ""  # MQTT client identifier (redacted)
 STALE_T_SEC = 15 * 60  # 15 minutes
 
-ANCHOR_MACS: List[str] = [
-    "ce59ac2d9cc5", #404
-    "d39d76bbc21b", #ea9 
-    "e94e09efad55", #2b1
-    "e7a7f022204d"  #blank
-]
+ANCHOR_MACS: List[str] = []  # List of anchor MAC addresses (redacted - dynamically discovered at runtime)
 
-"""
-Inbound message example (indented):\
-
-{"is_moving":null,
-"location": {
-    "dead_zones":[],
-    "map_id":"6419785d59613200077df1d6",
-    "position":{
-        "quality":"normal",
-        "unused_anchors":[{"cart_d":4.67,"id":"ea9","mac":"d39d76bbc21b","rssi":-66.19}],
-        "used_anchors":[{"cart_d":1.0,"id":"404","mac":"ce59ac2d9cc5","rssi":-57.0},{"cart_d":2.07,"id":"blank","mac":"e7a7f022204d","rssi":-59.47},{"cart_d":4.97,"id":"2b1","mac":"e94e09efad55","rssi":-64.92}],
-        "x":5.92,
-        "y":2.21,
-        "z":0.0},
-    "strategy":"centroid",
-    "zones":[]},
-"tag":{"ble":1,
-        "id":"31955",
-        "mac":"c00fbe457cd3",
-        "uwb":0},     
-"timestamp":1751374881169}
-"""
-
-"""
-Terminal calls for API and MQTT info:
-
-API-- get info for anchor from <amac:str>: curl.exe -u admin:ubudu_rocks "https://ils-paris.ubudu.com/confv1/api/dongles?macAddress=<amac:str>"
-MQTT-- get tag coordinate and rssi info: mosquitto_sub.exe -h ils-paris.ubudu.com -v -t "engine/6ba4a2a3-0/positions"
-
-Note: Anchor MAC addresses are now dynamically discovered from the first MQTT message,
-      extracting from both used_anchors and unused_anchors arrays.
-"""
+# Note: Anchor MAC addresses are now dynamically discovered from the first MQTT message,
+#       extracting from both used_anchors and unused_anchors arrays.
 #sample: anchor mqqt topic for mac adress x:str =  ANCHOR_BASE.format(x)
 #      all key anchor info (ewma, x-vector, etc...) lives inside the python process
 #      mqtt receives: comp. tag info: (macadress, cep95)
 
 def create_anchor_class(anch_mac: str) -> Anchor:
     """
-    Create an Anchor object by fetching anchor configuration from the Ubudu API.   
+    Create an Anchor object by fetching anchor configuration from the API.   
     Args:
         anch_mac: MAC address of the anchor to initialize        
     Returns:
@@ -93,7 +58,7 @@ def create_anchor_class(anch_mac: str) -> Anchor:
 
 def create_anchor_classes(anch_macs: List[str]) -> Dict[str, Anchor]:
     """
-    Create multiple Anchor objects by fetching anchor configurations from the Ubudu API.   
+    Create multiple Anchor objects by fetching anchor configurations from the API.   
     Args:
         anch_macs: List of MAC addresses of anchors to initialize       
     Returns:
